@@ -132,6 +132,10 @@ data/*.json
 export_*.csv
 *.csv
 
+# 运行报告
+result/
+result/*.md
+
 # 临时文件
 tmp/
 temp/
