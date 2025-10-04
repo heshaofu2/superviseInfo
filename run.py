@@ -3,8 +3,22 @@
 运行脚本 - 支持不同运行模式
 """
 import argparse
-from main import main as run_crawler
+import logging
+import sys
+from crawler_manager import run_crawler
 from storage import DataStorage
+
+
+def setup_logging():
+    """设置日志"""
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        handlers=[
+            logging.FileHandler('crawler.log', encoding='utf-8'),
+            logging.StreamHandler(sys.stdout)
+        ]
+    )
 
 
 def show_status():
@@ -60,6 +74,7 @@ def main():
     args = parser.parse_args()
 
     if args.mode == "crawl":
+        setup_logging()
         print("开始爬取数据...")
         run_crawler()
     elif args.mode == "status":
